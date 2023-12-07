@@ -1,0 +1,246 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* */
+
+html,
+body {
+  min-height: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #fefefe;
+  background-image: linear-gradient(315deg, #fefefe 0%, #00a4e4 74%);
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+.content {
+  padding: 10px 10px;
+  background: #fff;
+
+
+  @media (min-width: 640px) {
+    width: 620px;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+}
+
+.content>div {
+  margin-top: 15px;
+}
+
+/*
+.block {
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid #777;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
+
+input.block {
+    width: 45px;
+    height: 45px;
+}
+*/
+
+.blocks {
+  display: flex;
+}
+
+.block {
+  flex-grow: 1;
+  flex-basis: 0;
+  border: none;
+  border-top: 1px solid #777;
+  border-bottom: 1px solid #777;
+  border-left: 1px solid #ddd;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.block:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-left: 1px solid #777;
+}
+
+.block:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-right: 1px solid #777;
+}
+
+.buttons {
+  text-align: center;
+}
+
+#letters {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #777;
+}
+
+#output,
+#used {
+  line-height: 1.75rem;
+}
