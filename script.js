@@ -200,7 +200,7 @@ const findWords = () => {
 };
 
 const run = async () => {
-  const wordData = await load("/dictionary.json");
+  const wordData = await load("dictionary.json");
 
   dictionary = wordData.map((w) => w.split(""));
   console.log(`got ${dictionary.length} words`);
