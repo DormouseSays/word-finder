@@ -24,8 +24,6 @@ const bind = () => {
     .querySelector("#addButton")
     .addEventListener("click", function (event) {
       console.log("add clicked");
-      //   console.log(event); // The event details
-      //   console.log(event.target); // The clicked element
       blocks = [...blocks, ""];
       findWords();
       render();
@@ -47,31 +45,36 @@ const bind = () => {
   });
 };
 
-const handleKeyDown = (e) => {
-  e.preventDefault();
-  console.log("input keydown", e);
-  if (e.keyCode >= 65 && e.keyCode <= 90) {
-    e.target.value = e.key;
-  } else {
-    e.target.value = "";
-  }
-  if (e.target.nextSibling && e.keyCode !== 8) {
-    e.target.nextSibling.focus();
-  } else if (e.target.previousSibling && e.keyCode === 8) {
-    e.target.previousSibling.focus();
+const handleInput = (e) => {
+  console.log('handleInput', e)
+
+  let val = (e.data && e.data.charCodeAt(0)) || 0;
+
+  console.log(`handleInput got val ${val}`)
+
+  if (val > 96) {
+    val -= 32;
   }
 
-  //debugger;
+  if (val < 65 || val > 90) {
+    e.preventDefault();
+    console.log(`ignored ${e.data}`)
+    e.target.innerText = "";
+  } else {
+    if (e.target.innerText && e.target.innerText.length > 0) {
+      console.log(`val is ${e.target.innerText} shrinking to ${e.data[0]}`)
+      e.target.innerText = e.data[0]
+    }
+  }
 
   //re-sync data to array
   const blockEls = document.querySelectorAll(".block");
   blockEls.forEach((b, i) => {
-    blocks[i] = b.value;
+    blocks[i] = b.innerText.toLowerCase();
   });
 
   findWords();
-  //render();
-};
+}
 
 const handleWordClick = (e) => {
   const word = e.target.innerText;
@@ -80,41 +83,24 @@ const handleWordClick = (e) => {
   findWords();
 }
 
-/*
-const handleInputChange = (e) => {
-  console.log("input change", e);
-  //TODO re-sync in separate onchange handler to get key or empty
-  const blockEls = document.querySelectorAll(".block");
-  blockEls.forEach((b, i) => {
-    blocks[i] = b.value;
-  });
-
-  console.log("updated blocks to ", blocks);
-
-  findWords();
-};
-*/
-
 const render = () => {
   const el = document.querySelector(".blocks");
 
   //TODO try new replaceChildren() API
   el.innerHTML = "";
   for (let i = 0; i < blocks.length; i++) {
-    // const newEl = document.createElement('div');
-    // newEl.classList.add("block");
-    // newEl.innerHTML = blocks[i];
-    // el.appendChild(newEl);
 
-    const newEl = document.createElement("input");
+    const newEl = document.createElement("div");
     newEl.classList.add("block");
-    newEl.value = blocks[i];
-    newEl.setAttribute("maxlength", 1);
-    newEl.setAttribute("size", 1);
-    newEl.addEventListener("keydown", handleKeyDown);
-    //newEl.addEventListener("change", handleInputChange);
+    newEl.innerText = blocks[i];
+    newEl.setAttribute("contenteditable", true);
+    newEl.addEventListener("input", handleInput);
     el.appendChild(newEl);
   }
+
+  const debugEl = document.getElementById("debug");
+  debugEl.innerText = blocks.join(", ");
+
 };
 
 const findWords = () => {
@@ -125,13 +111,11 @@ const findWords = () => {
     return;
   }
 
-
-
   //initial filter to get right length and letters
   let possibleWords = dictionary.filter(
     (w) => w.length === blocks.length
   );
-  console.log(`word length possibleWords ${possibleWords.length}`, possibleWords)
+  console.log(`word length possibleWords ${possibleWords.length}`)
 
   if (letters.length > 0) {
     possibleWords = possibleWords.filter(
@@ -154,9 +138,6 @@ const findWords = () => {
 
   }
 
-  
-
-
   console.log(`letter count ${possibleWords.length}`)
 
   // filter to match existing letter positions
@@ -173,11 +154,6 @@ const findWords = () => {
 
   //filter to remove any words already used
   possibleWords = possibleWords.filter((w) => !used.includes(w.join("")));
-
-  console.log(
-    `based on letters got ${possibleWords.length} possible words`,
-    possibleWords.map((p) => p.join(""))
-  );
 
   //render possible words
   const outputEl = document.querySelector("#output");

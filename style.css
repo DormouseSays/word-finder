@@ -216,6 +216,7 @@ input.block {
   border-left: 1px solid #ddd;
   padding: 10px 0;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .block:first-child {
@@ -231,6 +232,13 @@ input.block {
 }
 
 .buttons {
+  text-align: center;
+}
+
+.button {
+  width:40px;
+  height: 40px;
+  line-height: 34px;
   text-align: center;
 }
 
